@@ -1,0 +1,12 @@
+title: PowerShell Console History File Deleted
+status: stable
+description: An intruder deleting the on-disk command history to hide their session (T1070.003).
+logsource:
+  category: file_delete
+  product: windows
+detection:
+  selection:
+    TargetFilename|endswith: '\PSReadLine\ConsoleHost_history.txt'
+  condition: selection
+level: high
+# Also watch process_creation for: Remove-Item / del / Clear-Content targeting that same path.
